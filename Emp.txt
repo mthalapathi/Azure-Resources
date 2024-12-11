@@ -1,3 +1,0 @@
-empno,ename,sal
-101,aaa,1000
-102x,bbb,2000
