@@ -1,6 +1,63 @@
-Azure 
-  - https://portal.azure.com/#home
-Udemy practice labs 
-  - https://dxclearning.edcast.com/insights/limited-access-build-in-demand-tech-skills-with-udemy-pro-f
+# Azure Resources
 
+## Azure Portal
+- [Azure Portal](https://portal.azure.com/#home)
 
+## Udemy Practice Labs
+- [Udemy Practice Labs](https://dxclearning.edcast.com/insights/limited-access-build-in-demand-tech-skills-with-udemy-pro-f)
+
+## Azure Copy
+- [Azure Copy Documentation](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10?tabs=dnf)
+- [YouTube - Azure Copy](https://www.youtube.com/watch?v=1JdnKzuta80)
+
+---
+
+# Hierarchical Namespace (HNS) in Azure Data Lake Storage Gen2
+
+The **Hierarchical Namespace (HNS)** in Azure Data Lake Storage Gen2 transforms your Blob Storage to behave like a typical file system, with folders and files.
+
+## Without HNS (Normal Blob Storage):
+- **Structure:** Everything is stored as blobs in a "flat" structure.
+- **Example:** A blob might have the name `folder1/file1.txt`. But, Azure treats it as a single file, with no real concept of a folder.
+- **Operations:** No folder management, so deleting a "folder" means deleting every blob manually with names starting with the folder prefix.
+
+## With HNS:
+- **Structure:** Files and folders are treated as distinct objects, just like on your computer.
+- **Example:** Uploading a `folder1/file1.txt` will create:
+  - A folder called `folder1`
+  - A file called `file1.txt` inside that folder
+- **Operations:** You can independently rename, move, or delete entire folders and files.
+
+## Key Differences
+
+| Feature                      | Flat Namespace (Normal Blob Storage)              | Hierarchical Namespace                       |
+|------------------------------|----------------------------------------------------|---------------------------------------------|
+| **Folder Structure**          | Flat list of blobs, no real folders.              | Files are arranged in real folders.        |
+| **Folder Deletion**           | Must delete all blobs with names starting with the folder name. | Delete the folder directly, and all files inside are deleted automatically. |
+| **Renaming Folders**          | Not possible. Must copy blobs with new names and delete the old ones. | Directly rename folders.                   |
+| **List Folder Contents**      | Filter blobs starting with the folder prefix.      | List files and subfolders under the folder directly. |
+
+## Why Use HNS?
+
+- **Better Organization:** Navigate through files and subfolders just like a traditional file system.
+- **Efficient Operations:** Perform operations like renaming, moving, or deleting entire folders, rather than individual files.
+- **Required for Data Lake Features:** Essential for advanced analytics and processing with tools like Hadoop or Spark.
+
+---
+
+## Use Case Comparison: Flat Namespace vs. Hierarchical Namespace
+
+| **Action**                   | **Flat Namespace**                                   | **Hierarchical Namespace**                           |
+|------------------------------|------------------------------------------------------|------------------------------------------------------|
+| **Delete a folder**           | Delete all blobs starting with the folder prefix.   | Delete the folder directly, and everything inside is removed. |
+| **Rename a folder**           | Not possible. Must copy and delete blobs individually. | Rename the folder directly.                        |
+| **List contents of a folder** | Filter blobs by prefix.                             | List files and subfolders directly inside the folder. |
+
+## Conclusion
+
+- If you need to manage data in a folder-like structure, **HNS** is the better choice.
+- It simplifies operations like renaming, deleting, and moving large datasets.
+- **HNS** is also necessary for advanced analytics tools such as Spark, Hadoop, or Azure Data Lake.
+
+## Storage Event Trigger and How To Automate Your ADF Pipeline Run
+- [Youtube Portal] (https://youtu.be/c7ZuVecWeCs?si=FWyXX8cxLFNRDT8Q)
