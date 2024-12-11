@@ -61,3 +61,52 @@ The **Hierarchical Namespace (HNS)** in Azure Data Lake Storage Gen2 transforms 
 
 ## Storage Event Trigger and How To Automate Your ADF Pipeline Run
 - [Youtube Portal] (https://youtu.be/c7ZuVecWeCs?si=FWyXX8cxLFNRDT8Q)
+
+## ADF Portal
+- [ADF Portal] - (https://www.youtube.com/playlist?list=PLm7Nm9btqfe3QNbrLY-Vyu8-wh3EanG6t)
+
+\
+# Azure Data Factory (ADF) Features: Parameters, Variables, Functions, and System Variables
+
+## Overview
+
+Below is a detailed representation of key features in Azure Data Factory (ADF), including definitions, use cases, and examples.
+
+| **Feature**      | **Definition** | **Use Case** | **Example** |
+|------------------|----------------|--------------|-------------|
+| **Parameter**    | A read-only, externally passed value into a pipeline or dataset, specified at runtime. | Dynamically pass values like file paths, connection strings, or control values for reuse. | Pipeline Parameter: `SourceFileName = employee.csv`<br>Used in a dataset: `@pipeline().parameters.SourceFileName` |
+| **Variable**     | A mutable storage of values within a pipeline for conditional logic or iterative operations. | Store intermediate values during pipeline execution. | Set Variable: `@add(variables('currentValue'), 1)` |
+| **Function**     | Built-in expressions used to manipulate or evaluate data. | Perform transformations, calculations, or format changes. | Expression: `@concat('prefix_', pipeline().parameters.fileName)` |
+| **System Variable** | Predefined variables in ADF to access metadata about pipeline runs, triggers, and execution. | Retrieve metadata like pipeline names, run IDs, or trigger start times for logging or auditing. | Pipeline Name: `@pipeline().Pipeline`<br>Trigger Time: `@trigger().startTime` |
+
+### Detailed Examples and Use Cases
+
+| **Feature**      | **Use Case** | **Example** |
+|------------------|--------------|-------------|
+| **Parameter**    | Dynamically define the file path for a source dataset in a pipeline. | Pipeline Parameter: `FilePath = folder1/2024/12/employee.csv`<br>Used in a dataset: `@pipeline().parameters.FilePath` |
+| **Variable**     | Increment a counter for iteration in a `ForEach` loop. | Set Variable Activity: `counter = @add(variables('counter'), 1)` |
+| **Function**     | Format the current UTC time to include it in a file name. | Expression: `@concat('output_', formatDateTime(utcnow(), 'yyyyMMddHHmmss'), '.csv')` |
+| **System Variable** | Log the pipeline run ID for audit or tracking purposes. | Pipeline Run ID: `@pipeline().RunId` |
+| **Parameter**    | Specify connection details for datasets to be dynamically assigned at runtime. | Dataset Parameter: `DatabaseName = SalesDB`<br>Reference in connection: `@dataset().DatabaseName` |
+| **Variable**     | Store the status of a specific activity execution for conditional execution in the pipeline. | Set Variable Activity: `Status = @activity('Copy Data').output.Status` |
+| **Function**     | Evaluate whether a file name contains a specific substring for filtering files in a `ForEach` loop. | Expression: `@contains(item().name, '2024')` |
+| **System Variable** | Use the trigger start time to filter data based on the pipeline execution window. | Trigger Start Time: `@trigger().startTime` |
+
+### Conclusion
+
+This table provides a concise overview of how parameters, variables, functions, and system variables are used in Azure Data Factory (ADF). By using these features effectively, you can build dynamic, efficient, and flexible data pipelines.
+
+### The article on Medium explains how to parameterize datasets in Azure Data Factory (ADF). It covers steps to make datasets dynamic by using parameters, 
+making it possible to pass values at runtime for items like file paths or database names. 
+The guide also discusses configuring parameters in linked services, datasets, and pipelines for flexibility in managing data flows.
+
+### For detailed instructions, visit the full article:
+- https://dataengineerazure.medium.com/how-to-parameterize-dataset-in-azure-data-factory-parameterization-in-azure-data-factory-4cae57d886aa
+- https://dataengineerazure.medium.com/copying-multiple-files-in-azure-data-factory-how-to-copy-multiple-files-using-single-copy-b3c1d15ddbd9
+
+### Virtual Machines
+- [Azure Portal] - (https://learn.microsoft.com/en-us/azure/virtual-machines/windows/quick-create-portal)
+
+### AZ-204: Course for Developing Solutions for Microsoft Azure
+- [Azure Portal]  - (https://dxc.udemy.com/course/azure-certification-1/learn/lecture/31955592#labs)
+
